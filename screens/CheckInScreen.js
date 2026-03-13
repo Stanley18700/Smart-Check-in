@@ -200,7 +200,7 @@ export default function CheckInScreen({ navigation }) {
                     <TextInput
                         style={styles.input}
                         placeholder="e.g. 6510000000"
-                        placeholderTextColor="#555"
+                        placeholderTextColor="#94A3B8"
                         value={studentId}
                         onChangeText={setStudentId}
                     />
@@ -209,7 +209,7 @@ export default function CheckInScreen({ navigation }) {
                     <TextInput
                         style={[styles.input, styles.multiline]}
                         placeholder="e.g. Flutter State Management"
-                        placeholderTextColor="#555"
+                        placeholderTextColor="#94A3B8"
                         value={previousTopic}
                         onChangeText={setPreviousTopic}
                         multiline
@@ -220,7 +220,7 @@ export default function CheckInScreen({ navigation }) {
                     <TextInput
                         style={[styles.input, styles.multiline]}
                         placeholder="e.g. Firebase Integration"
-                        placeholderTextColor="#555"
+                        placeholderTextColor="#94A3B8"
                         value={expectedTopic}
                         onChangeText={setExpectedTopic}
                         multiline
@@ -256,64 +256,76 @@ export default function CheckInScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#0f0f1a" },
-    scrollContent: { flexGrow: 1, padding: 16 },
+    container: { flex: 1, backgroundColor: "#F8FAFC" }, // Light Background
+    scrollContent: { flexGrow: 1, padding: 20 },
     stepCard: {
         flex: 1,
         padding: 24,
-        margin: 8,
-        backgroundColor: "#1a1a2e",
-        borderRadius: 20,
+        marginVertical: 12,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 24,
         borderWidth: 1,
-        borderColor: "#e9456033",
+        borderColor: "#E2E8F0",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 2,
     },
-    stepLabel: { color: "#e94560", fontWeight: "700", fontSize: 12, letterSpacing: 2, marginBottom: 8 },
-    stepTitle: { color: "#ffffff", fontSize: 26, fontWeight: "800", marginBottom: 12 },
-    stepDesc: { color: "#aaaacc", fontSize: 15, lineHeight: 22, marginBottom: 24 },
+    stepLabel: { color: "#F59E0B", fontWeight: "800", fontSize: 13, letterSpacing: 1.5, marginBottom: 8 }, // Gold
+    stepTitle: { color: "#1E3A8A", fontSize: 26, fontWeight: "900", marginBottom: 16, letterSpacing: -0.5 }, // Navy
+    stepDesc: { color: "#475569", fontSize: 16, lineHeight: 24, marginBottom: 24 }, // Slate
     locationBox: {
-        backgroundColor: "#0f3460",
-        borderRadius: 10,
-        padding: 12,
-        marginBottom: 20,
-    },
-    locationText: { color: "#e0e0ff", fontSize: 13, fontFamily: "monospace" },
-    label: { color: "#ccccee", fontSize: 14, fontWeight: "600", marginBottom: 6, marginTop: 16 },
-    input: {
-        backgroundColor: "#16213e",
-        borderRadius: 10,
+        backgroundColor: "#F1F5F9",
+        borderRadius: 12,
+        padding: 16,
+        marginBottom: 24,
         borderWidth: 1,
-        borderColor: "#333355",
-        color: "#ffffff",
-        padding: 12,
-        fontSize: 15,
+        borderColor: "#E2E8F0",
     },
-    multiline: { height: 80, textAlignVertical: "top" },
+    locationText: { color: "#334155", fontSize: 14, fontFamily: "monospace", marginVertical: 2 },
+    label: { color: "#1E293B", fontSize: 15, fontWeight: "700", marginBottom: 8, marginTop: 24 },
+    input: {
+        backgroundColor: "#FFFFFF",
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: "#CBD5E1",
+        color: "#1E293B",
+        padding: 14,
+        fontSize: 16,
+    },
+    multiline: { height: 100, textAlignVertical: "top" },
     primaryBtn: {
-        backgroundColor: "#e94560",
-        borderRadius: 14,
+        backgroundColor: "#1E3A8A", // Navy Blue
+        borderRadius: 16,
+        padding: 18,
+        alignItems: "center",
+        marginTop: 32,
+        shadowColor: "#1E3A8A",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 4,
+    },
+    primaryBtnText: { color: "#FFFFFF", fontWeight: "800", fontSize: 16 },
+    secondaryBtn: {
+        borderWidth: 2,
+        borderColor: "#1E3A8A",
+        borderRadius: 16,
         padding: 16,
         alignItems: "center",
-        marginTop: 24,
+        marginTop: 12,
     },
-    primaryBtnText: { color: "#fff", fontWeight: "800", fontSize: 16 },
-    secondaryBtn: {
-        borderWidth: 1,
-        borderColor: "#e94560",
-        borderRadius: 14,
-        padding: 14,
-        alignItems: "center",
-        marginTop: 10,
-    },
-    secondaryBtnText: { color: "#e94560", fontWeight: "700", fontSize: 15 },
+    secondaryBtnText: { color: "#1E3A8A", fontWeight: "700", fontSize: 16 },
     disabledBtn: { opacity: 0.5 },
     cancelBtn: {
-        marginTop: 20,
-        backgroundColor: "#e94560",
-        borderRadius: 10,
-        paddingVertical: 12,
-        paddingHorizontal: 30,
+        marginTop: 24,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 12,
+        paddingVertical: 14,
+        paddingHorizontal: 32,
     },
-    cancelBtnText: { color: "#fff", fontWeight: "700" },
+    cancelBtnText: { color: "#1E3A8A", fontWeight: "800", fontSize: 16 },
     cameraContainer: { flex: 1 },
     scanOverlay: {
         ...StyleSheet.absoluteFillObject,
@@ -321,11 +333,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     scanFrame: {
-        width: 220,
-        height: 220,
-        borderWidth: 3,
-        borderColor: "#e94560",
-        borderRadius: 16,
+        width: 240,
+        height: 240,
+        borderWidth: 4,
+        borderColor: "#1E3A8A",
+        borderRadius: 24,
         backgroundColor: "transparent",
     },
     scanHint: {
@@ -333,31 +345,30 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginTop: 16,
         backgroundColor: "#00000088",
-        paddingHorizontal: 12,
-        paddingVertical: 4,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
         borderRadius: 8,
+        fontWeight: "600",
     },
     modalOverlay: {
         flex: 1,
-        backgroundColor: "rgba(15, 15, 26, 0.85)",
+        backgroundColor: "rgba(15, 23, 42, 0.7)", // Slate-900 with opacity
         justifyContent: "center",
         alignItems: "center",
     },
     modalContent: {
-        backgroundColor: "#1a1a2e",
-        padding: 30,
+        backgroundColor: "#FFFFFF",
+        padding: 32,
         borderRadius: 24,
         alignItems: "center",
-        borderWidth: 2,
-        borderColor: "#e94560",
         width: "80%",
-        shadowColor: "#e94560",
+        shadowColor: "#1E3A8A",
         shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.3,
+        shadowOpacity: 0.15,
         shadowRadius: 20,
         elevation: 10,
     },
-    modalIcon: { fontSize: 60, marginBottom: 16 },
-    modalTitle: { color: "#ffffff", fontSize: 24, fontWeight: "900", marginBottom: 8 },
-    modalText: { color: "#aaaacc", fontSize: 16, textAlign: "center" },
+    modalIcon: { fontSize: 64, marginBottom: 16 },
+    modalTitle: { color: "#1E3A8A", fontSize: 24, fontWeight: "900", marginBottom: 8 },
+    modalText: { color: "#475569", fontSize: 16, textAlign: "center", lineHeight: 22 },
 });

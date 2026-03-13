@@ -47,7 +47,7 @@ export default function HistoryScreen() {
     if (loading) {
         return (
             <SafeAreaView style={styles.container}>
-                <ActivityIndicator size="large" color="#e94560" style={{ marginTop: 60 }} />
+                <ActivityIndicator size="large" color="#1E3A8A" style={{ marginTop: 60 }} />
                 <Text style={styles.loadingText}>Loading records...</Text>
             </SafeAreaView>
         );
@@ -57,7 +57,7 @@ export default function HistoryScreen() {
         <SafeAreaView style={styles.container}>
             <ScrollView
                 contentContainerStyle={styles.scrollContent}
-                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#e94560" />}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#1E3A8A" />}
             >
                 <Text style={styles.header}>📋 Check-in Records</Text>
                 <Text style={styles.subHeader}>{records.length} record(s) found</Text>
@@ -75,9 +75,11 @@ export default function HistoryScreen() {
                             style={[styles.card, r.type === "checkin" ? styles.checkinCard : styles.checkoutCard]}
                         >
                             <View style={styles.cardHeader}>
-                                <Text style={styles.badge}>
-                                    {r.type === "checkin" ? "✅ CHECK-IN" : "🎓 FINISH CLASS"}
-                                </Text>
+                                <View style={[styles.badgeContainer, r.type === "checkin" ? styles.badgeCheckin : styles.badgeCheckout]}>
+                                    <Text style={[styles.badge, r.type === "checkin" ? styles.badgeTextCheckin : styles.badgeTextCheckout]}>
+                                        {r.type === "checkin" ? "✅ CHECK-IN" : "🎓 FINISH CLASS"}
+                                    </Text>
+                                </View>
                                 <Text style={styles.timestamp}>{formatDate(r.timestamp)}</Text>
                             </View>
 
@@ -123,37 +125,68 @@ export default function HistoryScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#0f0f1a" },
-    scrollContent: { padding: 16 },
-    header: { color: "#ffffff", fontSize: 24, fontWeight: "800", marginBottom: 4 },
-    subHeader: { color: "#888aaa", fontSize: 13, marginBottom: 20 },
-    loadingText: { color: "#888", textAlign: "center", marginTop: 12 },
+    container: { flex: 1, backgroundColor: "#F8FAFC" },
+    scrollContent: { padding: 20, paddingBottom: 40 },
+    header: { color: "#1E3A8A", fontSize: 26, fontWeight: "900", marginBottom: 4, letterSpacing: -0.5 },
+    subHeader: { color: "#64748B", fontSize: 14, marginBottom: 24, fontWeight: "500" },
+    loadingText: { color: "#64748B", textAlign: "center", marginTop: 16, fontWeight: "500" },
+
     emptyCard: {
         alignItems: "center",
         padding: 40,
-        backgroundColor: "#1a1a2e",
-        borderRadius: 16,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 20,
         marginTop: 20,
+        borderWidth: 1,
+        borderColor: "#E2E8F0",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 2,
     },
-    emptyEmoji: { fontSize: 48, marginBottom: 12 },
-    emptyText: { color: "#ffffff", fontSize: 18, fontWeight: "700" },
-    emptySubText: { color: "#888aaa", fontSize: 14, textAlign: "center", marginTop: 6 },
+    emptyEmoji: { fontSize: 48, marginBottom: 16 },
+    emptyText: { color: "#1E3A8A", fontSize: 20, fontWeight: "800", marginBottom: 8 },
+    emptySubText: { color: "#64748B", fontSize: 15, textAlign: "center", lineHeight: 22 },
+
     card: {
-        backgroundColor: "#1a1a2e",
-        borderRadius: 16,
-        padding: 16,
-        marginBottom: 12,
-        borderLeftWidth: 4,
+        backgroundColor: "#FFFFFF",
+        borderRadius: 20,
+        padding: 20,
+        marginBottom: 16,
+        borderLeftWidth: 6,
+        borderWidth: 1,
+        borderColor: "#E2E8F0",
+        borderLeftColor: "transparent", // Overridden by specific card styles
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.05,
+        shadowRadius: 8,
+        elevation: 3,
     },
-    checkinCard: { borderLeftColor: "#e94560" },
-    checkoutCard: { borderLeftColor: "#16c79a" },
-    cardHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 8 },
-    badge: { color: "#ffffff", fontWeight: "700", fontSize: 12 },
-    timestamp: { color: "#888aaa", fontSize: 11 },
-    studentId: { color: "#e0e0ff", fontSize: 16, fontWeight: "700", marginBottom: 6 },
-    row: { flexDirection: "row", marginBottom: 8 },
-    meta: { color: "#6666aa", fontSize: 12, fontFamily: "monospace" },
-    fieldLabel: { color: "#888aaa", fontSize: 12, marginTop: 8, fontWeight: "600" },
-    fieldValue: { color: "#ccccee", fontSize: 14, marginTop: 2 },
-    moodText: { color: "#ccccee", fontSize: 16, marginTop: 2 },
+    checkinCard: { borderLeftColor: "#1E3A8A" }, // Navy
+    checkoutCard: { borderLeftColor: "#F59E0B" }, // Gold
+
+    cardHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 14 },
+
+    badgeContainer: {
+        paddingHorizontal: 10,
+        paddingVertical: 4,
+        borderRadius: 12,
+    },
+    badgeCheckin: { backgroundColor: "#DBEAFE" }, // Light Blue
+    badgeTextCheckin: { color: "#1E3A8A" }, // Dark Blue
+    badgeCheckout: { backgroundColor: "#FEF3C7" }, // Light Gold
+    badgeTextCheckout: { color: "#D97706" }, // Dark Gold
+
+    badge: { fontWeight: "800", fontSize: 11, letterSpacing: 0.5 },
+    timestamp: { color: "#94A3B8", fontSize: 12, fontWeight: "500" },
+
+    studentId: { color: "#1E293B", fontSize: 18, fontWeight: "800", marginBottom: 10 },
+    row: { flexDirection: "row", marginBottom: 16 },
+    meta: { color: "#64748B", fontSize: 13, fontFamily: "monospace", backgroundColor: "#F1F5F9", paddingHorizontal: 8, paddingVertical: 4, borderRadius: 6 },
+
+    fieldLabel: { color: "#94A3B8", fontSize: 12, marginTop: 12, fontWeight: "700", textTransform: "uppercase", letterSpacing: 0.5 },
+    fieldValue: { color: "#334155", fontSize: 15, marginTop: 4, lineHeight: 22 },
+    moodText: { color: "#334155", fontSize: 18, marginTop: 4, fontWeight: "600" },
 });

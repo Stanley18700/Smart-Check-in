@@ -12,91 +12,73 @@ import {
 export default function HomeScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="#0f0f1a" />
+            <StatusBar barStyle="dark-content" backgroundColor="#F8FAFC" />
             <ScrollView contentContainerStyle={styles.scrollContent}>
-                {/* Hero */}
-                <View style={styles.hero}>
-                    <Text style={styles.heroIcon}>🎓</Text>
-                    <Text style={styles.heroTitle}>Smart Check-in</Text>
-                    <Text style={styles.heroSubtitle}>
-                        Class Check-in & Learning Reflection App
-                    </Text>
-                    <View style={styles.heroBadge}>
-                        <Text style={styles.heroBadgeText}>Mobile Application Development</Text>
-                    </View>
-                </View>
 
-                {/* Info Cards */}
-                <View style={styles.infoRow}>
-                    <View style={styles.infoCard}>
-                        <Text style={styles.infoEmoji}>📍</Text>
-                        <Text style={styles.infoLabel}>GPS Location</Text>
-                    </View>
-                    <View style={styles.infoCard}>
-                        <Text style={styles.infoEmoji}>📷</Text>
-                        <Text style={styles.infoLabel}>QR Scanner</Text>
-                    </View>
-                    <View style={styles.infoCard}>
-                        <Text style={styles.infoEmoji}>☁️</Text>
-                        <Text style={styles.infoLabel}>Firebase</Text>
-                    </View>
+                <View style={styles.header}>
+                    <Text style={styles.greeting}>Welcome back,</Text>
+                    <Text style={styles.title}>What would you like to do?</Text>
                 </View>
 
                 {/* Main Buttons */}
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>What would you like to do?</Text>
-
                     <TouchableOpacity
                         style={[styles.mainBtn, styles.checkinBtn]}
                         onPress={() => navigation.navigate("CheckIn")}
-                        activeOpacity={0.85}
+                        activeOpacity={0.8}
                     >
                         <View style={styles.btnContent}>
-                            <Text style={styles.btnIcon}>✅</Text>
-                            <View>
-                                <Text style={styles.btnTitle}>Check In</Text>
+                            <View style={styles.iconCircle}>
+                                <Text style={styles.btnIcon}>✅</Text>
+                            </View>
+                            <View style={styles.textContainer}>
+                                <Text style={styles.btnTitle}>Check In to Class</Text>
                                 <Text style={styles.btnDesc}>Start class · Record GPS · Scan QR</Text>
                             </View>
                         </View>
-                        <Text style={styles.btnArrow}>›</Text>
+                        <Text style={styles.btnArrow}>→</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[styles.mainBtn, styles.finishBtn]}
                         onPress={() => navigation.navigate("FinishClass")}
-                        activeOpacity={0.85}
+                        activeOpacity={0.8}
                     >
                         <View style={styles.btnContent}>
-                            <Text style={styles.btnIcon}>🎓</Text>
-                            <View>
-                                <Text style={[styles.btnTitle, { color: "#000" }]}>Finish Class</Text>
-                                <Text style={[styles.btnDesc, { color: "#00000088" }]}>
+                            <View style={[styles.iconCircle, styles.iconCircleDark]}>
+                                <Text style={styles.btnIcon}>🎓</Text>
+                            </View>
+                            <View style={styles.textContainer}>
+                                <Text style={[styles.btnTitle, { color: "#1E3A8A" }]}>Finish Class</Text>
+                                <Text style={styles.btnDescDark}>
                                     End class · Reflect · Submit learning
                                 </Text>
                             </View>
                         </View>
-                        <Text style={[styles.btnArrow, { color: "#000" }]}>›</Text>
+                        <Text style={[styles.btnArrow, { color: "#1E3A8A" }]}>→</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[styles.mainBtn, styles.historyBtn]}
                         onPress={() => navigation.navigate("History")}
-                        activeOpacity={0.85}
+                        activeOpacity={0.8}
                     >
                         <View style={styles.btnContent}>
-                            <Text style={styles.btnIcon}>📋</Text>
-                            <View>
-                                <Text style={styles.btnTitle}>My Records</Text>
-                                <Text style={styles.btnDesc}>View all check-in history</Text>
+                            <View style={[styles.iconCircle, styles.iconCircleLight]}>
+                                <Text style={styles.btnIcon}>📋</Text>
+                            </View>
+                            <View style={styles.textContainer}>
+                                <Text style={[styles.btnTitle, { color: "#334155" }]}>My Records</Text>
+                                <Text style={styles.btnDescDark}>View all check-in history</Text>
                             </View>
                         </View>
-                        <Text style={styles.btnArrow}>›</Text>
+                        <Text style={[styles.btnArrow, { color: "#475569" }]}>→</Text>
                     </TouchableOpacity>
                 </View>
 
                 {/* Footer */}
                 <Text style={styles.footer}>
-                    Powered by Firebase · Built with React Native (Expo)
+                    Smart Class Check-in System
                 </Text>
             </ScrollView>
         </SafeAreaView>
@@ -104,93 +86,77 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#0f0f1a" },
-    scrollContent: { padding: 16, paddingBottom: 40 },
+    container: { flex: 1, backgroundColor: "#F8FAFC" },
+    scrollContent: { padding: 20, paddingBottom: 40, flexGrow: 1, justifyContent: "center" },
 
-    hero: { alignItems: "center", paddingVertical: 40 },
-    heroIcon: { fontSize: 64, marginBottom: 12 },
-    heroTitle: {
-        color: "#ffffff",
-        fontSize: 34,
-        fontWeight: "900",
-        letterSpacing: -1,
-    },
-    heroSubtitle: {
-        color: "#aaaacc",
-        fontSize: 15,
-        textAlign: "center",
-        marginTop: 6,
-        marginHorizontal: 20,
-    },
-    heroBadge: {
-        marginTop: 14,
-        backgroundColor: "#e9456022",
-        borderWidth: 1,
-        borderColor: "#e9456066",
-        borderRadius: 20,
-        paddingHorizontal: 14,
-        paddingVertical: 5,
-    },
-    heroBadgeText: { color: "#e94560", fontSize: 12, fontWeight: "600" },
-
-    infoRow: { flexDirection: "row", justifyContent: "space-between", marginBottom: 32 },
-    infoCard: {
-        flex: 1,
-        backgroundColor: "#1a1a2e",
-        borderRadius: 14,
-        padding: 14,
-        alignItems: "center",
-        marginHorizontal: 4,
-        borderWidth: 1,
-        borderColor: "#ffffff11",
-    },
-    infoEmoji: { fontSize: 26, marginBottom: 4 },
-    infoLabel: { color: "#aaaacc", fontSize: 12, fontWeight: "600" },
+    header: { marginBottom: 32, paddingHorizontal: 4 },
+    greeting: { color: "#64748B", fontSize: 16, fontWeight: "600", marginBottom: 4 },
+    title: { color: "#1E3A8A", fontSize: 28, fontWeight: "800", letterSpacing: -0.5 },
 
     section: { marginBottom: 24 },
-    sectionTitle: {
-        color: "#888aaa",
-        fontSize: 13,
-        fontWeight: "700",
-        letterSpacing: 1,
-        marginBottom: 14,
-        textTransform: "uppercase",
-    },
 
     mainBtn: {
-        borderRadius: 18,
-        padding: 18,
-        marginBottom: 12,
+        borderRadius: 20,
+        padding: 20,
+        marginBottom: 16,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
-        elevation: 6,
+        shadowOpacity: 0.08,
+        shadowRadius: 12,
+        elevation: 4,
     },
     checkinBtn: {
-        backgroundColor: "#1a1a2e",
-        borderWidth: 1.5,
-        borderColor: "#e94560",
+        backgroundColor: "#1E3A8A", // Navy Blue
     },
-    finishBtn: { backgroundColor: "#16c79a" },
-    historyBtn: {
-        backgroundColor: "#1a1a2e",
+    finishBtn: {
+        backgroundColor: "#FEF3C7", // Light Gold
         borderWidth: 1,
-        borderColor: "#4444aa",
+        borderColor: "#FDE68A"
     },
-    btnContent: { flexDirection: "row", alignItems: "center", gap: 14 },
-    btnIcon: { fontSize: 30 },
-    btnTitle: { color: "#ffffff", fontSize: 18, fontWeight: "800" },
-    btnDesc: { color: "#aaaacc", fontSize: 13, marginTop: 2 },
-    btnArrow: { color: "#e94560", fontSize: 28, fontWeight: "300" },
+    historyBtn: {
+        backgroundColor: "#FFFFFF", // White
+        borderWidth: 1,
+        borderColor: "#E2E8F0",
+    },
+
+    btnContent: { flexDirection: "row", alignItems: "center", gap: 16, flex: 1 },
+    textContainer: { flex: 1 },
+
+    iconCircle: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        backgroundColor: "rgba(255,255,255,0.15)",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    iconCircleDark: {
+        backgroundColor: "rgba(245, 158, 11, 0.2)",
+    },
+    iconCircleLight: {
+        backgroundColor: "#F1F5F9",
+    },
+
+    btnIcon: {
+        fontSize: 24,
+        // On iOS emojis in text can sit weirdly, line height helps
+        lineHeight: 28,
+    },
+
+    btnTitle: { color: "#FFFFFF", fontSize: 18, fontWeight: "800", marginBottom: 4 },
+    btnDesc: { color: "#CBD5E1", fontSize: 13, fontWeight: "500" },
+    btnDescDark: { color: "#64748B", fontSize: 13, fontWeight: "500" },
+
+    btnArrow: { color: "#FFFFFF", fontSize: 24, fontWeight: "bold" },
 
     footer: {
-        color: "#444466",
-        fontSize: 12,
+        color: "#94A3B8",
+        fontSize: 13,
         textAlign: "center",
-        marginTop: 8,
+        marginTop: "auto",
+        fontWeight: "500",
     },
 });

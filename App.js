@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import WelcomeScreen from "./screens/WelcomeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import CheckInScreen from "./screens/CheckInScreen";
 import FinishClassScreen from "./screens/FinishClassScreen";
@@ -12,17 +13,22 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Welcome"
         screenOptions={{
-          headerStyle: { backgroundColor: "#1a1a2e" },
-          headerTintColor: "#e94560",
+          headerStyle: { backgroundColor: "#1E3A8A" }, // Academic Navy
+          headerTintColor: "#FFFFFF",
           headerTitleStyle: { fontWeight: "bold", fontSize: 18 },
         }}
       >
         <Stack.Screen
+          name="Welcome"
+          component={WelcomeScreen}
+          options={{ headerShown: false }} // No header on welcome screen
+        />
+        <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "Smart Check-in" }}
+          options={{ title: "Smart Check-in Dashboard" }}
         />
         <Stack.Screen
           name="CheckIn"
