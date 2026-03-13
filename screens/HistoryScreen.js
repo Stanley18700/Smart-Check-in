@@ -14,7 +14,7 @@ import { db } from "../firebase";
 
 const MOOD_EMOJI = { 1: "😡", 2: "🙁", 3: "😐", 4: "🙂", 5: "😄" };
 
-export default function HistoryScreen() {
+export default function HistoryScreen({ navigation }) {
     const [records, setRecords] = useState([]);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -43,6 +43,21 @@ export default function HistoryScreen() {
         if (!ts?.seconds) return "—";
         return new Date(ts.seconds * 1000).toLocaleString();
     };
+
+    // Handle custom back navigation
+    useEffect(() => {
+        navigation.setOptions({
+            headerLeft: () => (
+                <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                    style={{ paddingHorizontal: 16, paddingVertical: 8, flexDirection: "row", alignItems: "center" }}
+                >
+                    <Text style={{ color: "#FFFFFF", fontSize: 24, marginRight: 4, fontWeight: "500" }}>‹</Text>
+                    <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "600" }}>Back</Text>
+                </TouchableOpacity>
+            ),
+        });
+    }, [navigation]);
 
     if (loading) {
         return (
