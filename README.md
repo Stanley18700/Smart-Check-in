@@ -91,7 +91,7 @@ npx expo export --platform web
 firebase deploy --only hosting
 ```
 
-Live URL: *(see Firebase Hosting URL after deployment)*
+Live URL: **https://smart-class-check-in-app.web.app**
 
 ## Firestore Data Structure
 
