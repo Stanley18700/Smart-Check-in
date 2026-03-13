@@ -42,6 +42,27 @@ export default function CheckInScreen({ navigation }) {
         }
     }, [showSuccess]);
 
+    // Handle custom back navigation for steps
+    useEffect(() => {
+        navigation.setOptions({
+            headerLeft: () => (
+                <TouchableOpacity
+                    onPress={() => {
+                        if (step > 1) {
+                            setStep(step - 1);
+                        } else {
+                            navigation.goBack();
+                        }
+                    }}
+                    style={{ paddingHorizontal: 16, paddingVertical: 8, flexDirection: "row", alignItems: "center" }}
+                >
+                    <Text style={{ color: "#FFFFFF", fontSize: 24, marginRight: 4, fontWeight: "500" }}>‹</Text>
+                    <Text style={{ color: "#FFFFFF", fontSize: 16, fontWeight: "600" }}>Back</Text>
+                </TouchableOpacity>
+            ),
+        });
+    }, [navigation, step]);
+
     const getLocation = async () => {
         const { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== "granted") {

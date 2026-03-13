@@ -15,9 +15,12 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="Welcome"
         screenOptions={{
-          headerStyle: { backgroundColor: "#1E3A8A" }, // Academic Navy
+          headerStyle: { backgroundColor: "#1E3A8A", elevation: 0, shadowOpacity: 0 },
           headerTintColor: "#FFFFFF",
-          headerTitleStyle: { fontWeight: "bold", fontSize: 18 },
+          headerTitleStyle: { fontWeight: "800", fontSize: 18 },
+          headerBackTitle: "Back", // Show "Back" text explicitly
+          headerBackTitleVisible: true,
+          headerLeftContainerStyle: { paddingLeft: 8 },
         }}
       >
         <Stack.Screen
@@ -28,7 +31,11 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: "Smart Check-in Dashboard" }}
+          options={{
+            title: "Smart Check-in Dashboard",
+            headerLeft: () => null, // Lock user in dashboard so they can't go back to Welcome
+            gestureEnabled: false, // Prevent swipe back on iOS
+          }}
         />
         <Stack.Screen
           name="CheckIn"
