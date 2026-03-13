@@ -8,6 +8,7 @@ import {
     ScrollView,
     SafeAreaView,
     Alert,
+    Modal,
     Platform,
 } from "react-native";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
@@ -26,6 +27,18 @@ export default function FinishClassScreen({ navigation }) {
     const [learnedToday, setLearnedToday] = useState("");
     const [feedback, setFeedback] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+
+    // Auto-navigate home after showing success popup
+    React.useEffect(() => {
+        if (showSuccess) {
+            const timer = setTimeout(() => {
+                setShowSuccess(false);
+                navigation.navigate("Home");
+            }, 2500);
+            return () => clearTimeout(timer);
+        }
+    }, [showSuccess]);
 
     const getLocation = async () => {
         const { status } = await Location.requestForegroundPermissionsAsync();
@@ -83,9 +96,7 @@ export default function FinishClassScreen({ navigation }) {
                 learnedToday: learnedToday.trim(),
                 feedback: feedback.trim(),
             });
-            Alert.alert("🎓 Class Finished!", "Your reflection has been saved.", [
-                { text: "OK", onPress: () => navigation.navigate("Home") },
-            ]);
+            setShowSuccess(true); // Show success popup
         } catch (e) {
             Alert.alert("Error", "Failed to save: " + e.message);
         }
@@ -218,6 +229,16 @@ export default function FinishClassScreen({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+
+            <Modal visible={showSuccess} transparent animationType="fade">
+                <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalIcon}>🎓</Text>
+                        <Text style={styles.modalTitle}>Class Finished!</Text>
+                        <Text style={styles.modalText}>Your reflection has been saved successfully.</Text>
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 }
@@ -304,4 +325,27 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         borderRadius: 8,
     },
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: "rgba(15, 15, 26, 0.85)",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modalContent: {
+        backgroundColor: "#1a1a2e",
+        padding: 30,
+        borderRadius: 24,
+        alignItems: "center",
+        borderWidth: 2,
+        borderColor: "#16c79a",
+        width: "80%",
+        shadowColor: "#16c79a",
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.3,
+        shadowRadius: 20,
+        elevation: 10,
+    },
+    modalIcon: { fontSize: 60, marginBottom: 16 },
+    modalTitle: { color: "#ffffff", fontSize: 24, fontWeight: "900", marginBottom: 8 },
+    modalText: { color: "#aaaacc", fontSize: 16, textAlign: "center" },
 });
